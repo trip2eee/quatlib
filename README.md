@@ -47,4 +47,7 @@ $ + \left( a_1c_2 - b_1d_2 + c_1a_2 - d_1b_2 \right)j $
 
 $ + \left( a_1d_2 + b_1c_2 - c_1b_2 + d_1a_2 \right)k $
 
+# Reference
+
+https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
 

@@ -30,10 +30,10 @@ TEST_F(TestQuaternion, Constructor)
     float32_t arf32q[4U] = {1.0F, 2.0F, 3.0F, 4.0F};
     CQuaternion<float32_t> q1(arf32q);
 
-    EXPECT_EQ(q1[0], arf32q[0]);
-    EXPECT_EQ(q1[1], arf32q[1]);
-    EXPECT_EQ(q1[2], arf32q[2]);
-    EXPECT_EQ(q1[3], arf32q[3]);
+    EXPECT_EQ(q1(0), arf32q[0]);
+    EXPECT_EQ(q1(1), arf32q[1]);
+    EXPECT_EQ(q1(2), arf32q[2]);
+    EXPECT_EQ(q1(3), arf32q[3]);
 }
 
 TEST_F(TestQuaternion, Add)
@@ -47,7 +47,7 @@ TEST_F(TestQuaternion, Add)
     CQuaternion<float32_t> q3 = q1 + q2;
 
     for(uint32_t u32I = 0U; u32I < 4U; u32I++){
-        EXPECT_FLOAT_EQ(q3[u32I], arf32q1[u32I] + arf32q2[u32I]);
+        EXPECT_FLOAT_EQ(q3(u32I), arf32q1[u32I] + arf32q2[u32I]);
     }
 }
 
@@ -62,7 +62,7 @@ TEST_F(TestQuaternion, Sub)
     CQuaternion<float32_t> q3 = q1 - q2;
 
     for(uint32_t u32I = 0U; u32I < 4U; u32I++){
-        EXPECT_FLOAT_EQ(q3[u32I], arf32q1[u32I] - arf32q2[u32I]);
+        EXPECT_FLOAT_EQ(q3(u32I), arf32q1[u32I] - arf32q2[u32I]);
     }
 }
 
@@ -92,11 +92,60 @@ TEST_F(TestQuaternion, Mul)
 
     CQuaternion<float32_t> q3 = q1 * q2;
 
-    EXPECT_FLOAT_EQ(q3[0], fa3);
-    EXPECT_FLOAT_EQ(q3[1], fb3);
-    EXPECT_FLOAT_EQ(q3[2], fc3);
-    EXPECT_FLOAT_EQ(q3[3], fd3);    
+    EXPECT_FLOAT_EQ(q3(0), fa3);
+    EXPECT_FLOAT_EQ(q3(1), fb3);
+    EXPECT_FLOAT_EQ(q3(2), fc3);
+    EXPECT_FLOAT_EQ(q3(3), fd3);    
 }
 
 
+TEST_F(TestQuaternion, Conjugate)
+{
+    float32_t arf32q1[4U] = {1.0F, 2.0F, 3.0F, 4.0F};       // 1 + 2i + 3j + 4k    
+    CQuaternion<float32_t> q1(arf32q1);
+    CQuaternion<float32_t> q3 = q1 * q1.Conjugate();
+
+    // 1 + 4 + 9 + 16 = 30
+    EXPECT_NEAR(q3(0), 30.0F, 1e-6);
+    EXPECT_NEAR(q3(1), 0.0F, 1e-6);
+    EXPECT_NEAR(q3(2), 0.0F, 1e-6);
+    EXPECT_NEAR(q3(3), 0.0F, 1e-6);
+
+    q3.Print();
+}
+
+TEST_F(TestQuaternion, Invert)
+{
+    float32_t arf32q1[4U] = {1.0F, 2.0F, 3.0F, 4.0F};       // 1 + 2i + 3j + 4k
+
+    CQuaternion<float32_t> q1(arf32q1);
+
+    CQuaternion<float32_t> q3 = q1 * q1.Invert();
+
+    EXPECT_NEAR(q3(0), 1.0F, 1e-6);
+    EXPECT_NEAR(q3(1), 0.0F, 1e-6);
+    EXPECT_NEAR(q3(2), 0.0F, 1e-6);
+    EXPECT_NEAR(q3(3), 0.0F, 1e-6);
+
+    q3.Print();
+}
+
+TEST_F(TestQuaternion, Rotation)
+{
+    CQuaternion<float32_t> qr;
+    const float32_t arf32EulerAngles[3U] = {
+        3.14F / 3.0F,
+        3.14F / 4.0F,
+        3.14F / 6.0F
+    };
+    qr.ToQuaternion(arf32EulerAngles);
+    qr.Print();
+    
+    float32_t arf32ConvAngles[3U];
+    qr.ToEulerAngles(arf32ConvAngles);
+
+    EXPECT_NEAR(arf32ConvAngles[0], arf32EulerAngles[0], 1e-6);
+    EXPECT_NEAR(arf32ConvAngles[1], arf32EulerAngles[1], 1e-6);
+    EXPECT_NEAR(arf32ConvAngles[2], arf32EulerAngles[2], 1e-6);
+}
 
