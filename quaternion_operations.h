@@ -174,22 +174,22 @@ namespace QuatLib
         const float32_t f32y = m_arfQ[2];
         const float32_t f32z = m_arfQ[3];
 
-        const float32_t f32q0 = oQr.m_arfQ[0];
-        const float32_t f32q1 = oQr.m_arfQ[1];
-        const float32_t f32q2 = oQr.m_arfQ[2];
-        const float32_t f32q3 = oQr.m_arfQ[3];
+        const float32_t f32qr = oQr.m_arfQ[0];
+        const float32_t f32qx = oQr.m_arfQ[1];
+        const float32_t f32qy = oQr.m_arfQ[2];
+        const float32_t f32qz = oQr.m_arfQ[3];
 
-        const float32_t f32r00 = static_cast<_T>(1.0) - static_cast<_T>(2.0)*((f32q2*f32q2) + (f32q3*f32q3));
-        const float32_t f32r01 = static_cast<_T>(2.0)*((f32q1*f32q2) - (f32q0*f32q3));
-        const float32_t f32r02 = static_cast<_T>(2.0)*((f32q0*f32q2) + (f32q1*f32q3));
+        const float32_t f32r00 = static_cast<_T>(1.0) - static_cast<_T>(2.0)*((f32qy*f32qy) + (f32qz*f32qz));
+        const float32_t f32r01 = static_cast<_T>(2.0)*((f32qx*f32qy) - (f32qr*f32qz));
+        const float32_t f32r02 = static_cast<_T>(2.0)*((f32qr*f32qy) + (f32qx*f32qz));
 
-        const float32_t f32r10 = static_cast<_T>(2.0)*((f32q1*f32q2) + (f32q0*f32q3));
-        const float32_t f32r11 = static_cast<_T>(1.0) - static_cast<_T>(2.0)*((f32q1*f32q1) + (f32q3*f32q3));
-        const float32_t f32r12 = static_cast<_T>(2.0)*((f32q2*f32q3) - (f32q0*f32q1));
+        const float32_t f32r10 = static_cast<_T>(2.0)*((f32qx*f32qy) + (f32qr*f32qz));
+        const float32_t f32r11 = static_cast<_T>(1.0) - static_cast<_T>(2.0)*((f32qx*f32qx) + (f32qz*f32qz));
+        const float32_t f32r12 = static_cast<_T>(2.0)*((f32qy*f32qz) - (f32qr*f32qx));
 
-        const float32_t f32r20 = static_cast<_T>(2.0)*((f32q1*f32q3) - (f32q0*f32q2));
-        const float32_t f32r21 = static_cast<_T>(2.0)*((f32q0*f32q1) + (f32q2*f32q3));
-        const float32_t f32r22 = static_cast<_T>(1.0) - static_cast<_T>(2.0)*((f32q1*f32q1) + (f32q2*f32q2));
+        const float32_t f32r20 = static_cast<_T>(2.0)*((f32qx*f32qz) - (f32qr*f32qy));
+        const float32_t f32r21 = static_cast<_T>(2.0)*((f32qr*f32qx) + (f32qy*f32qz));
+        const float32_t f32r22 = static_cast<_T>(1.0) - static_cast<_T>(2.0)*((f32qx*f32qx) + (f32qy*f32qy));
 
         oY.m_arfQ[0] = static_cast<_T>(0.0);
         oY.m_arfQ[1] = (f32r00*f32x) + (f32r01*f32y) + (f32r02*f32z);
@@ -247,22 +247,22 @@ namespace QuatLib
     template<typename _T>
     void CQuaternion<_T>::ToRotationMatrix(_T (&arfRotation)[9U]) const
     {
-        const float32_t f32q0 = static_cast<float32_t>(m_arfQ[0]);
-        const float32_t f32q1 = static_cast<float32_t>(m_arfQ[1]);
-        const float32_t f32q2 = static_cast<float32_t>(m_arfQ[2]);
-        const float32_t f32q3 = static_cast<float32_t>(m_arfQ[3]);
+        const float32_t f32qr = static_cast<float32_t>(m_arfQ[0]);
+        const float32_t f32qx = static_cast<float32_t>(m_arfQ[1]);
+        const float32_t f32qy = static_cast<float32_t>(m_arfQ[2]);
+        const float32_t f32qz = static_cast<float32_t>(m_arfQ[3]);
 
-        const float32_t f32r0 = 1.0F - 2.0F*(f32q2*f32q2 + f32q3*f32q3);
-        const float32_t f32r1 = 2.0F*(f32q1*f32q2 - f32q0*f32q3);
-        const float32_t f32r2 = 2.0F*(f32q0*f32q2 + f32q1*f32q3);
+        const float32_t f32r0 = 1.0F - 2.0F*(f32qy*f32qy + f32qz*f32qz);
+        const float32_t f32r1 = 2.0F*(f32qx*f32qy - f32qr*f32qz);
+        const float32_t f32r2 = 2.0F*(f32qr*f32qy + f32qx*f32qz);
 
-        const float32_t f32r3 = 2.0F*(f32q1*f32q2 + f32q0*f32q3);
-        const float32_t f32r4 = 1.0F - 2.0F*(f32q1*f32q1 + f32q3*f32q3);
-        const float32_t f32r5 = 2.0F*(f32q2*f32q3 - f32q0*f32q1);
+        const float32_t f32r3 = 2.0F*(f32qx*f32qy + f32qr*f32qz);
+        const float32_t f32r4 = 1.0F - 2.0F*(f32qx*f32qx + f32qz*f32qz);
+        const float32_t f32r5 = 2.0F*(f32qy*f32qz - f32qr*f32qx);
 
-        const float32_t f32r6 = 2.0F*(f32q1*f32q3 - f32q0*f32q2);
-        const float32_t f32r7 = 2.0F*(f32q0*f32q1 + f32q2*f32q3);
-        const float32_t f32r8 = 1.0F - 2.0F*(f32q1*f32q1 + f32q2*f32q2);
+        const float32_t f32r6 = 2.0F*(f32qx*f32qz - f32qr*f32qy);
+        const float32_t f32r7 = 2.0F*(f32qr*f32qx + f32qy*f32qz);
+        const float32_t f32r8 = 1.0F - 2.0F*(f32qx*f32qx + f32qy*f32qy);
 
         arfRotation[0] = f32r0;
         arfRotation[1] = f32r1;
