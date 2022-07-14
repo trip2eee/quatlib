@@ -15,57 +15,57 @@ $$ q_1 + q_2 = \left(a_1 + a_2\right) + \left(b_1 + b_2\right)i + \left(c_1 + c_
 ## Multiplication
 
 ### Multiplications of basis elements
-* $$ i1 = 1i = i $$
-* $$ j1 = 1j = j $$
-* $$ k1 = 1k = k $$
-* $$ i^2 = j^2 = k^2 = -1 $$
-* $$ ij = k, ji = -k $$
-* $$ jk = i, kj = -i $$
-* $$ ki = j, ik = -j $$
-* $$ ikj = -1 $$
+$$ i1 = 1i = i $$
+$$ j1 = 1j = j $$
+$$ k1 = 1k = k $$
+$$ i^2 = j^2 = k^2 = -1 $$
+$$ ij = k, ji = -k $$
+$$ jk = i, kj = -i $$
+$$ ki = j, ik = -j $$
+$$ ikj = -1 $$
 
 ### Multiplication of two quaternions
-$ q_1 = a_1 + b_1i + c_1j + d_1k $
+$$ q_1 = a_1 + b_1i + c_1j + d_1k $$
 
-$ q_2 = a_2 + b_2i + c_2j + d_2k $
+$$ q_2 = a_2 + b_2i + c_2j + d_2k $$
 
-$ q_1 * q_2 = a_1\left( a_2 + b_2i + c_2j + d_2k \right) + b_1i\left( a_2 + b_2i + c_2j + d_2k \right) + c_1j\left( a_2 + b_2i + c_2j + d_2k \right) + d_1k\left( a_2 + b_2i + c_2j + d_2k \right)$
+$$ q_1 * q_2 = a_1\left( a_2 + b_2i + c_2j + d_2k \right) + b_1i\left( a_2 + b_2i + c_2j + d_2k \right) + c_1j\left( a_2 + b_2i + c_2j + d_2k \right) + d_1k\left( a_2 + b_2i + c_2j + d_2k \right)$$
 
-$ = a_1a_2 + a_1b_2i + a_1c_2j + a_1d_2k $
+$$ = a_1a_2 + a_1b_2i + a_1c_2j + a_1d_2k $$
 
-$ + b_1a_2i - b_1b_2 + b_1c_2k - b_1d_2j  + $
+$$ + b_1a_2i - b_1b_2 + b_1c_2k - b_1d_2j  + $$
 
-$ + c_1a_2j - c_1b_2k - c_1c_2 + c_1d_2i  + $
+$$ + c_1a_2j - c_1b_2k - c_1c_2 + c_1d_2i  + $$
 
-$ + d_1a_2k + d_1b_2j - d_1c_2i - d_1d_2 $
+$$ + d_1a_2k + d_1b_2j - d_1c_2i - d_1d_2 $$
 
-$ = \left( a_1a_2 -b_1b_2 - c_1c_2 - d_1d_2 \right) $
+$$ = \left( a_1a_2 -b_1b_2 - c_1c_2 - d_1d_2 \right) $$
 
-$ + \left( a_1b_2 + b_1a_2 + c_1d_2 - d_1c_2 \right)i $
+$$ + \left( a_1b_2 + b_1a_2 + c_1d_2 - d_1c_2 \right)i $$
 
-$ + \left( a_1c_2 - b_1d_2 + c_1a_2 - d_1b_2 \right)j $
+$$ + \left( a_1c_2 - b_1d_2 + c_1a_2 - d_1b_2 \right)j $$
 
-$ + \left( a_1d_2 + b_1c_2 - c_1b_2 + d_1a_2 \right)k $
+$$ + \left( a_1d_2 + b_1c_2 - c_1b_2 + d_1a_2 \right)k $$
 
 
 ## Rotation
 
-Euclidean vectors $\left(a_x, a_y, a_z\right)$ in $ R^3 $ can be rewritten as $a_xi+a_yj+a_zk$, where $i$, $j$ and $k$ are unit vectors representing the tree Cartesian axes.
+Euclidean vectors $\left(a_x, a_y, a_z\right)$ in $ R^3 $ can be rewritten as $a_xi+a_yj+a_zk $, where $i$, $j$ and $k$ are unit vectors representing the tree Cartesian axes.
 
-A rotation of angle $\theta$ around the axis defined by the unit vector $u = u_xi+u_yj+u_zk$ can be represented by a quaternion using an extension [2] of Euler's formula [3].
+A rotation of angle $\theta$ around the axis defined by the unit vector $ u = u_xi+u_yj+u_zk $ can be represented by a quaternion using an extension [2] of Euler's formula [3].
 
 $$ e^{ix} = cos x + i sin x $$
 
 $$ q = e^{\frac{\theta}{2}\left(u_xi+u_yj+u_zk\right)} = cos\frac{\theta}{2} + \left(u_x+u_yj+u_zk\right)sin\frac{\theta}{2} $$
 
 
-The rotation can be applied to an ordinary vector $ p = \left(p_x, p_y, p_z\right) = p_xi+p_yj+p_zk$ in $R^3$ as $p' = qpq^*$, where
+The rotation can be applied to an ordinary vector $ p = \left(p_x, p_y, p_z\right) = p_xi+p_yj+p_zk $ in $R^3$ as $p' = qpq^*$, where
 
 $$ q^* = e^{-\frac{\theta}{2}\left(u_xi+u_yj+u_zk\right)} = cos\frac{\theta}{2} - \left(u_xi+u_yj+u_zk\right)sin\frac{\theta}{2} $$
 
 The result of $p' = qpq^*$ is as follows and its the result of Rotate() implemented in [quaternion_operations.h](quaternion_operations.h).
 
-$$ p' = \left(q_{r} \left(a_{x} q_{r} - a_{y} q_{z} + a_{z} q_{y}\right) + q_{x} \left(a_{x} q_{x} + a_{y} q_{y} + a_{z} q_{z}\right) + q_{y} \left(- a_{x} q_{y} + a_{y} q_{x} + a_{z} q_{r}\right) - q_{z} \left(a_{x} q_{z} + a_{y} q_{r} - a_{z} q_{x}\right)\right) i + \left(q_{r} \left(a_{x} q_{z} + a_{y} q_{r} - a_{z} q_{x}\right) - q_{x} \left(- a_{x} q_{y} + a_{y} q_{x} + a_{z} q_{r}\right) + q_{y} \left(a_{x} q_{x} + a_{y} q_{y} + a_{z} q_{z}\right) + q_{z} \left(a_{x} q_{r} - a_{y} q_{z} + a_{z} q_{y}\right)\right) j + \left(q_{r} \left(- a_{x} q_{y} + a_{y} q_{x} + a_{z} q_{r}\right) + q_{x} \left(a_{x} q_{z} + a_{y} q_{r} - a_{z} q_{x}\right) - q_{y} \left(a_{x} q_{r} - a_{y} q_{z} + a_{z} q_{y}\right) + q_{z} \left(a_{x} q_{x} + a_{y} q_{y} + a_{z} q_{z}\right)\right) k $$
+$$ p' = \left(q_{r} \left(a_{x} q_{r} - a_{y} q_{z} + a_{z} q_{y}\right) + q_{x} \left(a_{x} q_{x} + a_{y} q_{y} + a_{z} q_{z}\right) + q_{y} \left(- a_{x} q_{y} + a_{y} q_{x} + a_{z} q_{r}\right) - q_{z} \left(a_{x} q_{z} + a_{y} q_{r} - a_{z} q_{x}\right)\right) i + \\\\ \left(q_{r} \left(a_{x} q_{z} + a_{y} q_{r} - a_{z} q_{x}\right) - q_{x} \left(- a_{x} q_{y} + a_{y} q_{x} + a_{z} q_{r}\right) + q_{y} \left(a_{x} q_{x} + a_{y} q_{y} + a_{z} q_{z}\right) + q_{z} \left(a_{x} q_{r} - a_{y} q_{z} + a_{z} q_{y}\right)\right) j + \\\\ \left(q_{r} \left(- a_{x} q_{y} + a_{y} q_{x} + a_{z} q_{r}\right) + q_{x} \left(a_{x} q_{z} + a_{y} q_{r} - a_{z} q_{x}\right) - q_{y} \left(a_{x} q_{r} - a_{y} q_{z} + a_{z} q_{y}\right) + q_{z} \left(a_{x} q_{x} + a_{y} q_{y} + a_{z} q_{z}\right)\right) k $$
 
 Note that the real part is zeroed out during the computation.
 
