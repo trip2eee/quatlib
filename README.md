@@ -10,19 +10,19 @@ $$ q_1 = a_1 + b_1i + c_1j + d_1k $$
 
 $$ q_2 = a_2 + b_2i + c_2j + d_2k $$
 
-$ q_1 + q_2 = \left(a_1 + a_2\right) + \left(b_1 + b_2\right)i + \left(c_1 + c_2\right)j + \left(d_1 + d_2\right)k$
+$$ q_1 + q_2 = \left(a_1 + a_2\right) + \left(b_1 + b_2\right)i + \left(c_1 + c_2\right)j + \left(d_1 + d_2\right)k $$
 
 ## Multiplication
 
 ### Multiplications of basis elements
-* $ i1 = 1i = i $
-* $ j1 = 1j = j $
-* $ k1 = 1k = k $
-* $ i^2 = j^2 = k^2 = -1 $
-* $ ij = k, ji = -k $
-* $ jk = i, kj = -i $
-* $ ki = j, ik = -j $
-* $ ikj = -1 $
+* $$ i1 = 1i = i $$
+* $$ j1 = 1j = j $$
+* $$ k1 = 1k = k $$
+* $$ i^2 = j^2 = k^2 = -1 $$
+* $$ ij = k, ji = -k $$
+* $$ jk = i, kj = -i $$
+* $$ ki = j, ik = -j $$
+* $$ ikj = -1 $$
 
 ### Multiplication of two quaternions
 $ q_1 = a_1 + b_1i + c_1j + d_1k $
@@ -72,14 +72,14 @@ Note that the real part is zeroed out during the computation.
 ### Quaternion-derived rotation matrix
 Rotation matrix for $q = q_r + q_xi + q_yj + q_zk$ is derived by using sympy in [quaternion.ipynb](quaternion.ipynb).
 
-$$ R = \begin{bmatrix}qr^{2} + q_x^{2} - q_y^{2} - q_z^{2} & - 2 q_r q_z + 2 q_x q_y & 2 q_r q_y + 2 q_x q_z\\2 q_r q_z + 2 q_x q_y & q_r^{2} - q_x^{2} + q_y^{2} - q_z^{2} & - 2 q_r q_x + 2 q_y q_z\\- 2 q_r q_y + 2 q_x q_z & 2 q_r q_x + 2 q_y q_z & q_r^{2} - q_x^{2} - q_y^{2} + q_z^{2}\end{bmatrix} $$
+$$ R = \begin{bmatrix}qr^{2} + q_x^{2} - q_y^{2} - q_z^{2} & - 2 q_r q_z + 2 q_x q_y & 2 q_r q_y + 2 q_x q_z \\\\2 q_r q_z + 2 q_x q_y & q_r^{2} - q_x^{2} + q_y^{2} - q_z^{2} & - 2 q_r q_x + 2 q_y q_z \\\\- 2 q_r q_y + 2 q_x q_z & 2 q_r q_x + 2 q_y q_z & q_r^{2} - q_x^{2} - q_y^{2} + q_z^{2}\end{bmatrix} $$
 
 
 If $q$ is pure rotation, $\lVert q\rVert = q_r^2 + q_x^2+q_y^2 + q_z^2 = 1$
 
 Therefore the rotation matrix can be rewritten as 
 
-$$R = \begin{bmatrix}1 - 2\left(q_y^{2} - q_z^{2}\right) & 2 \left( q_x q_y - q_r q_z\right) & 2\left( q_r q_y + q_x q_z\right) \\ 2\left( q_r q_z + q_x q_y\right) & 1 - 2\left(q_x^{2} - q_z^{2}\right) & 2\left(q_y q_z - q_r q_x\right) \\ 2\left( q_x q_z - q_r q_y\right) & 2\left( q_r q_x + q_y q_z \right) & 1 - 2\left( q_x^{2} - q_y^{2}\right) \end{bmatrix}$$
+$$R = \begin{bmatrix}1 - 2\left(q_y^{2} - q_z^{2}\right) & 2 \left( q_x q_y - q_r q_z\right) & 2\left( q_r q_y + q_x q_z\right) \\\\ 2\left( q_r q_z + q_x q_y\right) & 1 - 2\left(q_x^{2} - q_z^{2}\right) & 2\left(q_y q_z - q_r q_x\right) \\\\ 2\left( q_x q_z - q_r q_y\right) & 2\left( q_r q_x + q_y q_z \right) & 1 - 2\left( q_x^{2} - q_y^{2}\right) \end{bmatrix}$$
 
 The matrix is the result of ToRotationMatrix() implemented in [quaternion_operations.h](quaternion_operations.h).
 
