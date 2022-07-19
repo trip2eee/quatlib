@@ -75,7 +75,9 @@ If $q$ is pure rotation, $\lVert q\rVert = q_r^2 + q_x^2+q_y^2 + q_z^2 = 1$
 
 Therefore the rotation matrix can be rewritten as 
 
-$$R = \begin{bmatrix}1 - 2\left(q_y^{2} - q_z^{2}\right) & 2 \left( q_x q_y - q_r q_z\right) & 2\left( q_r q_y + q_x q_z\right) \\\\ 2\left( q_r q_z + q_x q_y\right) & 1 - 2\left(q_x^{2} - q_z^{2}\right) & 2\left(q_y q_z - q_r q_x\right) \\\\ 2\left( q_x q_z - q_r q_y\right) & 2\left( q_r q_x + q_y q_z \right) & 1 - 2\left( q_x^{2} - q_y^{2}\right) \end{bmatrix}$$
+$$R = \begin{bmatrix}1 - 2\left(q_y^{2} + q_z^{2}\right) & 2 \left( q_x q_y - q_r q_z\right) & 2\left( q_r q_y + q_x q_z\right) \\\\ 
+2\left( q_r q_z + q_x q_y\right) & 1 - 2\left(q_x^{2} + q_z^{2}\right) & 2\left(q_y q_z - q_r q_x\right) \\\\
+ 2\left( q_x q_z - q_r q_y\right) & 2\left( q_r q_x + q_y q_z \right) & 1 - 2\left( q_x^{2} + q_y^{2}\right) \end{bmatrix}$$
 
 The matrix is the result of ToRotationMatrix() implemented in [quaternion_operations.h](quaternion_operations.h).
 
@@ -131,25 +133,27 @@ Let's compare rotation matrices defined by Euler angle and quaternion, which are
 
 $$ R = R_zR_yR_x $$
 
-$$ R_q = \begin{bmatrix}\cos{\psi} \cos{\theta} & \sin{\phi} \sin{\theta} \cos{\psi} - \sin{\psi} \cos{\phi} & \sin{\phi} \sin{\psi} + \sin{\theta} \cos{\phi} \cos{\psi}\\\\\sin{\psi} \cos{\theta} & \sin{\phi} \sin{\psi} \sin{\theta} + \cos{\phi} \cos{\psi} & - \sin{\phi} \cos{\psi} + \sin{\psi} \sin{\theta} \cos{\phi}\\\\- \sin{\theta} & \sin{\phi} \cos{\theta} & \cos{\phi} \cos{\theta}\end{bmatrix} $$
+$$ R_q = \begin{bmatrix}\cos{\psi} \cos{\theta} & \sin{\phi} \sin{\theta} \cos{\psi} - \sin{\psi} \cos{\phi} & \sin{\phi} \sin{\psi} + \sin{\theta} \cos{\phi} \cos{\psi}\\\\ \sin{\psi} \cos{\theta} & \sin{\phi} \sin{\psi} \sin{\theta} + \cos{\phi} \cos{\psi} & - \sin{\phi} \cos{\psi} + \sin{\psi} \sin{\theta} \cos{\phi}\\\\- \sin{\theta} & \sin{\phi} \cos{\theta} & \cos{\phi} \cos{\theta}\end{bmatrix} $$
 
 
-$$R_e = \begin{bmatrix}1 - 2\left(q_y^{2} - q_z^{2}\right) & 2 \left( q_x q_y - q_r q_z\right) & 2\left( q_r q_y + q_x q_z\right) \\\\ 2\left( q_r q_z + q_x q_y\right) & 1 - 2\left(q_x^{2} - q_z^{2}\right) & 2\left(q_y q_z - q_r q_x\right) \\\\ 2\left( q_x q_z - q_r q_y\right) & 2\left( q_r q_x + q_y q_z \right) & 1 - 2\left( q_x^{2} - q_y^{2}\right) \end{bmatrix}$$
+$$R_e = \begin{bmatrix}1 - 2\left(q_y^{2} + q_z^{2}\right) & 2 \left( q_x q_y - q_r q_z\right) & 2\left( q_r q_y + q_x q_z\right) \\\\
+ 2\left( q_r q_z + q_x q_y\right) & 1 - 2\left(q_x^{2} + q_z^{2}\right) & 2\left(q_y q_z - q_r q_x\right) \\\\ 
+ 2\left( q_x q_z - q_r q_y\right) & 2\left( q_r q_x + q_y q_z \right) & 1 - 2\left( q_x^{2} + q_y^{2}\right) \end{bmatrix}$$
 
 Since the two matrices are equivalent, we can compute angles exploiting the equivalence.
 
 $\theta$ can be obtained by equating (3,1) of the both matrices.
 
-$$ \theta = asin(2\left( -q_x q_z + q_r q_y\right)) $$
+$$ \theta = asin(2\left( q_r q_y-q_x q_z\right)) $$
 
 $\psi$ can computed by dividing (2,1) by (1,1) to cancel out $cos\theta$.
 
-$$ \psi = atan\frac{2\left( q_r q_z + q_x q_y\right)}{1 - 2\left(q_y^{2} - q_z^{2}\right)} $$
+$$ \psi = atan\frac{2\left( q_r q_z + q_x q_y\right)}{1 - 2\left(q_y^{2} + q_z^{2}\right)} $$
 
 
 By dividing (3,2) by (3,3) to cancel out $cos\theta$, $\phi$ can be obtained.
 
-$$\phi = atan\frac{2\left( q_r q_x + q_y q_z \right)}{1 - 2\left( q_x^{2} - q_y^{2}\right)}$$
+$$\phi = atan\frac{2\left( q_r q_x + q_y q_z \right)}{1 - 2\left( q_x^{2} + q_y^{2}\right)}$$
 
 ToEulerAngles() in [quaternion_operations.h](quaternion_operations.h) is the implementation of conversion from quaternion into Euler angle.
 
