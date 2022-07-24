@@ -1,3 +1,9 @@
+"""
+@fn     quaternion.py
+@brief  Quaternion library (github.com/trip2eee/quatlib)
+@author Jongmin Park
+@date   July 18, 2022
+"""
 import numpy as np
 
 class Quaternion:
@@ -63,7 +69,7 @@ class Quaternion:
         result = Quaternion(q3)
         return result
 
-    def conjucate(self) -> 'Quaternion':
+    def conjugate(self) -> 'Quaternion':
         result = Quaternion()
         result.q[0] =  self.q[0]
         result.q[1] = -self.q[1]
@@ -93,10 +99,12 @@ class Quaternion:
     def rotate(self, qr:'Quaternion') -> 'Quaternion':
         """This method rotates self by qr.
         """
-        result = qr*self*qr.conjucate()
+        result = qr*self*qr.conjugate()
         return result
     
     def to_euler_angles(self):
+        """This method computes Euler angles from the quaternion.
+        """
         qr = self.q[0]
         qx = self.q[1]
         qy = self.q[2]
@@ -108,7 +116,9 @@ class Quaternion:
 
         return roll, pitch, yaw
     
-    def to_quaternion(self, roll, pitch, yaw) -> 'Quaternion':        
+    def to_quaternion(self, roll, pitch, yaw) -> 'Quaternion':
+        """This method converts Euler angles to the quaternion.
+        """
         c_roll  = np.cos(roll * 0.5)
         c_pitch = np.cos(pitch * 0.5)
         c_yaw   = np.cos(yaw * 0.5)
@@ -130,6 +140,8 @@ class Quaternion:
         return self
 
     def to_rotation_matrix(self) -> np.matrix:
+        """This method computes 3x3 rotation matrix from the quaternion.
+        """
         qr = self.q[0]
         qx = self.q[1]
         qy = self.q[2]
@@ -151,6 +163,8 @@ class Quaternion:
 
 
     def rotation_axis(self):
+        """This method computes rotation axis of the quaternion.
+        """
         qx = self.q[1]
         qy = self.q[2]
         qz = self.q[3]
@@ -164,6 +178,8 @@ class Quaternion:
         return ax, ay, az
     
     def rotation_angle(self):
+        """This method computes rotation angle of the quaternion.
+        """
         qr = self.q[0]
         qx = self.q[1]
         qy = self.q[2]
