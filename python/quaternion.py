@@ -139,7 +139,7 @@ class Quaternion:
 
         return self
 
-    def to_rotation_matrix(self) -> np.matrix:
+    def to_rotation_matrix(self) -> np.array:
         """This method computes 3x3 rotation matrix from the quaternion.
         """
         qr = self.q[0]
@@ -159,7 +159,7 @@ class Quaternion:
         r7 = 2.0*(qr*qx + qy*qz)
         r8 = 1.0 - 2.0*(qx*qx + qy*qy)
 
-        return np.matrix([[r0, r1, r2],[r3, r4, r5], [r6, r7, r8]])
+        return np.array([[r0, r1, r2],[r3, r4, r5], [r6, r7, r8]])
 
 
     def rotation_axis(self):
