@@ -23,8 +23,8 @@ class QuaternionTest(unittest.TestCase):
         self.assertEqual(q3[3], 7)
 
     def  test_sub(self):
-        q1 = Quaternion(np.array([1, 1, 2, 4]))
-        q2 = Quaternion(np.array([0, 3, 2, 3]))
+        q1 = Quaternion([1, 1, 2, 4])
+        q2 = Quaternion([0, 3, 2, 3])
         
         q3 = q1 - q2
         print(q3)
@@ -35,8 +35,8 @@ class QuaternionTest(unittest.TestCase):
         self.assertEqual(q3[3], 1)
 
     def test_mul(self):
-        q1 = Quaternion(np.array([1, 2, 3, 4]))
-        q2 = Quaternion(np.array([3, 4, 5, 6]))
+        q1 = Quaternion([1, 2, 3, 4])
+        q2 = Quaternion([3, 4, 5, 6])
         
         q3 = q1 * q2
         print(q3)
@@ -75,7 +75,7 @@ class QuaternionTest(unittest.TestCase):
 
     def test_angle_to_quaternion(self):
 
-        p = Quaternion(np.array([0, 1, 0, 0]))
+        p = Quaternion([0, 1, 0, 0])
 
         # rotate around k-axis by 45 deg
         qr = Quaternion()
@@ -93,7 +93,7 @@ class QuaternionTest(unittest.TestCase):
 
     def test_angle_to_quaternion2(self):
 
-        p = Quaternion(np.array([0, 1, 0, 0]))
+        p = Quaternion([0, 1, 0, 0])
 
         # rotate around j-axis and k-axis by 45 deg
         qr = Quaternion()
@@ -123,7 +123,42 @@ class QuaternionTest(unittest.TestCase):
         self.assertAlmostEqual(p2[1], 0.5, 6)
         self.assertAlmostEqual(p2[2], 0.5, 6)
         self.assertAlmostEqual(p2[3], -np.sqrt(2)/2, 6)
-        
+    
+    def test_set_axis_angle(self):
+
+        # rotation around (1,1,0) by 180 deg.
+        # y     (1, 1, 0)
+        # |   /
+        # | /
+        # +--------- x
+        qr = Quaternion()        
+        qr.set_axis_angle(1, 1, 0, np.pi)
+
+        # p = (1, 0, 0)
+        p = Quaternion([0, 1, 0, 0])
+        p2 = p.rotate(qr)
+
+        # rotation of (1, 0, 0) around (1,1,0) by 180 deg = (0, 1, 0)
+        self.assertAlmostEqual(p2[0], 0.0, 6)
+        self.assertAlmostEqual(p2[1], 0.0, 6)
+        self.assertAlmostEqual(p2[2], 1.0, 6)
+        self.assertAlmostEqual(p2[3], 0.0, 6)
+
+
+        qr = Quaternion()        
+        qr.set_axis_angle(1, 1, 0, np.pi/2)
+
+        # p = (1, 0, 0)
+        p = Quaternion([0, 1, 0, 0])
+        p2 = p.rotate(qr)
+        print(p2)
+
+        # # rotation of (1, 0, 0) around (1,1,0) by 90 deg = (0, 1, 0)
+        self.assertAlmostEqual(p2[0], 0.0, 6)
+        self.assertAlmostEqual(p2[1], 0.5, 6)
+        self.assertAlmostEqual(p2[2], 0.5, 6)
+        self.assertAlmostEqual(p2[3], -1/np.sqrt(2), 6)
+
 
 if __name__ == '__main__':
     unittest.main()

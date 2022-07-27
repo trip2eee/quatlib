@@ -48,7 +48,7 @@ A rotation of angle $\theta$ around the axis defined by the unit vector $u = u_{
 
 $$ e^{ix} = cos x + i sin x $$
 
-$$ q = e^{\frac{\theta}{2}\left(u_xi+u_yj+u_zk\right)} = cos\frac{\theta}{2} + \left(u_x+u_yj+u_zk\right)sin\frac{\theta}{2} $$
+$$ q = e^{\frac{\theta}{2}\left(u_xi+u_yj+u_zk\right)} = cos\frac{\theta}{2} + \left(u_xi+u_yj+u_zk\right)sin\frac{\theta}{2} $$
 
 
 The rotation can be applied to an ordinary vector $p = \left(p_x, p_y, p_z\right) = p_xi+p_yj+p_zk$ in $R^3$ as $p' = qpq^*$, where
@@ -103,6 +103,7 @@ The expression $qpq^{*}$ rotates any vector quaternion p around an axis given by
 $$\left(a_x, a_y, a_z\right) = \frac{\left(q_x, q_y, q_z\right)}{\sqrt{q^2_x + q^2_y + q^2_z}}$$
 
 $$\theta = 2 atan2\left(\sqrt{q^2_x + q^2_y + q^2_z}, q_r\right)$$
+
 
 ### Euler angle to Quaternion
 

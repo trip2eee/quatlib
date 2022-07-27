@@ -10,7 +10,11 @@ class Quaternion:
     def __init__(self, q=None):
 
         if q is not None and isinstance(q, np.ndarray):
+            # if numpy array
             self.q = q.copy()
+        elif q is not None and isinstance(q, list) and len(q) == 4:
+            # if list
+            self.q = np.array(q, dtype=np.float32)
         else:
             self.q = np.array([0] * 4, dtype=np.float32)
     
@@ -187,4 +191,24 @@ class Quaternion:
 
         nv = np.sqrt(qx**2 + qy**2 + qz**2)
         return 2.0*np.arctan2(nv, qr)
+
+    def to_axis_angle(self):
+        """This method returns the rotation axis and the angle.
+        """
+        ax, ay, az = self.rotation_axis()
+        angle = self.rotation_angle()
+
+        return ax, ay, az, angle
+
+    def set_axis_angle(self, ax, ay, az, angle):
+        """This method sets quaternion values to given axis and angle.
+        """
+        nv = np.sqrt(ax**2 + ay**2 + az**2)
+        self.q[0] = np.cos(angle / 2.0)
+
+        s = np.sin(angle / 2.0)
+        self.q[1] = ax / nv * s
+        self.q[2] = ay / nv * s
+        self.q[3] = az / nv * s
+
 
