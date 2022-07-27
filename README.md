@@ -97,6 +97,9 @@ $$\left(0, p' \right) = \left(0, \left(v^Tv + q^2_r I + 2q_r \left[v\right]_{\ti
 
 $$R = \left(v^Tv + q^2_r I + 2q_r \left[v\right]_{\times} + \left[v\right]^2_{\times} \right)$$
 
+![rotation_vectors.png](./images/rotation_vectors.png)
+
+![rotated_vector.png](./images/rotated_vector.png)
 
 The expression $qpq^{*}$ rotates any vector quaternion p around an axis given by the vector a by angle $\theta$ can be found from the following equations
 
