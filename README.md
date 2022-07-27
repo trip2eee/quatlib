@@ -97,7 +97,11 @@ $$\left(0, p' \right) = \left(0, \left(v^Tv + q^2_r I + 2q_r \left[v\right]_{\ti
 
 $$R = \left(v^Tv + q^2_r I + 2q_r \left[v\right]_{\times} + \left[v\right]^2_{\times} \right)$$
 
+Rotation around (1, 1, 0.5) by $\pi/2$
+
 ![rotation_vectors.png](./images/rotation_vectors.png)
+
+Rotation Result
 
 ![rotated_vector.png](./images/rotated_vector.png)
 
